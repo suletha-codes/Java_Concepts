@@ -1,0 +1,30 @@
+class Person{
+	String name;
+	int age;
+	void details(){
+		
+		System.out.println("Name:" + " " + name);
+		System.out.println("Age:" + " " + age);
+		
+	}
+}
+class Employee extends Person{
+	float salary;
+	void benefits(){
+		
+		System.out.println("Salary:" + " " + salary);
+	}
+}
+class Hello{
+	public static void main(String[] args){
+	Employee obj = new Employee();
+	
+	obj.name = "Suletha";
+	obj.age = 33;
+	obj.salary = 700000f;
+	obj.benefits();
+	obj.details();
+	
+    }
+	
+}
