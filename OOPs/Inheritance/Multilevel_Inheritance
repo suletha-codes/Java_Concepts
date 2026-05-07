@@ -1,0 +1,48 @@
+class Electronics{
+	float price;
+	String brand;
+	Electronics(float price, String brand){
+		this.price = price;
+		this.brand = brand;
+	}
+	void displayDetails(){
+		System.out.println("The estimated price is:" + " " + price);
+		System.out.println("The brand is:" + " " + brand);
+	
+	}
+
+}
+class Mobile extends Electronics{
+	String catagory;
+	Mobile(float price, String brand, String catagory){
+		super(price, brand);
+		this.catagory = catagory;
+	}
+	void displayMobile(){
+		System.out.println("Mobile details");
+		displayDetails();
+		System.out.println("The catagory is:" + " " + catagory);
+	}
+	
+}
+class Laptop extends Electronics{
+	String laptopCatagory;
+	Laptop(float price, String brand, String laptopCatagory){
+		super(price, brand);
+		this.laptopCatagory = laptopCatagory;
+	}
+	void displayLaptop(){
+		System.out.println("Laptop details");
+		displayDetails();
+		System.out.println("The catagory is:" + " " + laptopCatagory);
+		
+	}
+}
+class Hello{
+	public static void main(String[] args){
+		Mobile obj1 = new Mobile(25000,"MotoG", "Gaming");
+		Laptop obj2 = new Laptop(70000,"HP","Business");
+		obj1.displayMobile();
+		obj2.displayLaptop();
+	}
+}
