@@ -1,0 +1,38 @@
+class BankAccount{
+	private double balance;
+	
+	BankAccount(double balance){
+		this.balance = balance;
+	}
+	public void deposit(double amount){
+		if(amount > 0){
+			balance += amount;
+			System.out.println("Deposited Amount:" + " " + amount);
+		}
+		
+	}
+	public void withdraw(double amount){
+		if(amount <= balance){
+			balance -= amount;
+			System.out.println("withdrawn Amount:" + " " + amount);
+		}
+		else{
+			System.out.println("Insufficient Balance");
+		}
+		
+	}
+	public void getBalance(){
+		System.out.println("Balance:" + " " + balance);
+	}
+}
+class Hello{
+	public static void main(String[] args){
+		BankAccount obj = new BankAccount(1000000);
+		
+		obj.deposit(10000);
+		obj.withdraw(5000);
+		obj.getBalance();
+		
+	}
+	
+}
