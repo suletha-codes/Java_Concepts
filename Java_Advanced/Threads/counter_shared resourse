@@ -1,0 +1,47 @@
+class Counter{
+	int count = 0;
+	synchronized void increment(){
+		count++;
+	}
+		
+}
+
+class myThread extends Thread{
+	
+	Counter c;
+	myThread(Counter c){
+		this.c = c;
+		
+	}
+	
+	public void run(){
+		for(int i=1;i <= 20; i++){
+			c.increment();
+		}
+		
+	}
+}
+class Sample{
+	public static void main(String[] args)throws InterruptedException{
+		Counter obj = new Counter();
+		
+		myThread t1 = new myThread(obj);
+		myThread t2 = new myThread(obj);
+		myThread t3 = new myThread(obj);
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		
+		t1.join();
+		t2.join();
+		t3.join();
+		
+		System.out.println(obj.count);
+		
+		
+		
+		
+
+	}
+}
