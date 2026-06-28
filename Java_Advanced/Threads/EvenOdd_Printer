@@ -1,0 +1,86 @@
+class Printer{
+	boolean odd = true;
+	
+	synchronized void print_odd(int num){
+		while(!odd){
+			try{
+				wait();
+			}
+			catch(InterruptedException e){
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("Odd no:" + num);
+		
+		odd = false;
+		notify();
+	}
+	
+	synchronized void print_even(int num){
+		while(odd){
+			try{
+				wait();
+			}
+			catch(InterruptedException e){
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("Even no:" + num);
+		
+		odd = true;
+		notify();
+	}
+	
+	
+}
+
+
+class EvenThread extends Thread{
+	Printer P;
+	EvenThread(Printer P){
+		this.P = P;
+		
+	}
+	
+	public void run(){
+		for(int i = 2; i<=20; i+=2){
+			P.print_even(i);
+		}
+	}
+}
+
+class OddThread extends Thread{
+	Printer P;
+	OddThread(Printer P){
+		this.P = P;
+		
+	}
+	
+	public void run(){
+		for(int i = 1; i<=20; i+=2){
+			P.print_odd(i);
+		}
+	}
+}
+
+class Sample{
+	public static void main(String[] args)throws InterruptedException{
+		
+		
+		Printer obj = new Printer();
+		EvenThread t1 = new EvenThread(obj);
+		OddThread t2 = new OddThread(obj);
+		
+		
+		t1.start();
+		t2.start();
+		
+		
+		  
+		
+		
+		
+	}
+} 
