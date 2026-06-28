@@ -1,0 +1,52 @@
+class Employee{
+	synchronized void printDocument(String name,int salary,String department){
+		System.out.println(name + " is a " + department +" and his salary is " + salary);
+	}
+	
+}
+ 
+
+class MyThread extends Thread{
+	Employee e;
+	String name;
+	int salary;
+	String department;
+	
+	MyThread(Employee e,String name, int salary, String department){
+		this.e = e;
+		this.name = name;
+		this.salary = salary;
+		this.department = department;
+	}
+	
+	
+	public void run(){
+		e.printDocument(name,salary,department);
+	}
+	
+}
+class Sample{
+	public static void main(String[] args) throws InterruptedException{
+		
+		Employee obj = new Employee();
+		MyThread t1 = new MyThread(obj,"Sarah", 50000, "QA");
+	    MyThread t2 = new MyThread(obj,"Aditi",35000, "Data Engg");
+		MyThread t3 = new MyThread(obj,"Sam",40000, "FSD");
+		System.out.println(t1.isAlive());
+		
+		t3.setPriority(10);
+
+
+		t1.start();
+		t2.start();
+		t3.start();
+		System.out.println(t1.isAlive());
+		
+		t1.join();
+		t2.join();
+		t3.join();
+		System.out.println(t1.isAlive());
+		
+	}
+	
+}
