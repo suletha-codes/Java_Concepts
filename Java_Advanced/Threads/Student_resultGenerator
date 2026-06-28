@@ -1,0 +1,56 @@
+class Result{
+	synchronized void printResult(String name, int m1, int m2,int m3,int m4,int m5){
+		
+		int total_marks;
+		
+		total_marks = m1+m2+m3+m4+m5;
+		
+		System.out.println("Total mark of: " + name + " is: " + total_marks);
+		
+	
+	}
+	
+	
+	
+}
+
+class PrintThraed extends Thread{
+	Result r;
+	String name;
+	int m1,m2,m3,m4,m5;
+	PrintThraed(Result r,String name, int m1, int m2,int m3,int m4,int m5){
+		this.r = r;
+		this.name = name;
+		this.m1 = m1;
+		this.m2 = m2;
+		this.m3 = m3;
+		this.m4 = m4;
+		this.m5 = m5;
+	}
+	
+	public void run(){
+		r.printResult(name,m1,m2,m3,m4,m5);
+	}
+}
+class Sample{
+	public static void main(String[] args) throws InterruptedException{
+		
+		Result obj = new Result();
+		PrintThraed t1 = new PrintThraed(obj,"Sarah",60,65,70,75,80);
+	    PrintThraed t2 = new PrintThraed(obj,"Aditi",60,68,70,95,80);
+		PrintThraed t3 = new PrintThraed(obj,"Sam",60,65,80,95,80);
+		System.out.println(t1.isAlive());
+
+
+		t1.start();
+		t2.start();
+		t3.start();
+		System.out.println(t1.isAlive());
+		
+		t1.join();
+		t2.join();
+		t3.join();
+		System.out.println(t1.isAlive());
+		
+	}
+}
